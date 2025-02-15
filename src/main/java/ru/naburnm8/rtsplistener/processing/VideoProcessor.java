@@ -5,12 +5,11 @@ import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.springframework.stereotype.Service;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
+
 
 @Service
 public class VideoProcessor {
@@ -26,31 +25,25 @@ public class VideoProcessor {
 
         try {
             System.out.println("Before starting grabber");
-            grabber.setOption("stimeout", "500");
-            grabber.start(); // Start the grabber
+            grabber.setOption("stimeout", "5000");
+            grabber.start();
             long lastFrameTime = 0;
             Frame frame;
             int i = 0;
             System.out.println("Starting grabber");
             while ((frame = grabber.grab()) != null) {
-                System.out.println("Grabbed!");
                 if (i > frameCount) {
                     break;
                 }
-
+                long startTime = System.currentTimeMillis();
                 long currentTime = System.currentTimeMillis();
                 if (currentTime - lastFrameTime >= frameIntervalMs) {
                     lastFrameTime = currentTime;
-
                     BufferedImage bufferedImage = converter.getBufferedImage(frame);
-
                     byte[] frameBytes = convertBufferedImageToBytes(bufferedImage);
-
-                    FrameData frameData = new FrameData(currentTime, frameBytes);
-
+                    FrameData frameData = new FrameData(currentTime - startTime, frameBytes);
                     sendFrame(frameData);
                     i++;
-                    System.out.println("Moving on");
                 }
                 System.out.println("Processing finished");
             }
@@ -58,7 +51,7 @@ public class VideoProcessor {
             e.printStackTrace();
         } finally {
             try {
-                grabber.stop(); // Stop the grabber
+                grabber.stop();
             } catch (Exception e) {
                 e.printStackTrace();
             }

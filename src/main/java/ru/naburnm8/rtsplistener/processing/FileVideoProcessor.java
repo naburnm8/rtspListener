@@ -4,7 +4,6 @@ import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.springframework.stereotype.Service;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -32,11 +31,11 @@ public class FileVideoProcessor {
 
                 Frame frame;
                 int frameCounter = 0;
+                long startTime = System.currentTimeMillis();
                 while ((frame = grabber.grab()) != null) {
                     if (frame.image == null){
                         continue;
                     }
-                    System.out.println("Frame " + frameCounter);
                     if (frameCounter >= frameCount){
                         break;
                     }
@@ -45,7 +44,7 @@ public class FileVideoProcessor {
                         lastFrameTime = currentTime;
                         BufferedImage bufferedImage = converter.getBufferedImage(frame);
                         byte[] frameBytes = convertBufferedImageToBytes(bufferedImage);
-                        FrameData frameData = new FrameData(currentTime, frameBytes);
+                        FrameData frameData = new FrameData(currentTime - startTime, frameBytes);
                         frameSender.sendFrame(frameData);
                     }
                     frameCounter++;
