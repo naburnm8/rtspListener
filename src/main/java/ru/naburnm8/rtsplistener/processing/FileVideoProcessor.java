@@ -44,7 +44,7 @@ public class FileVideoProcessor {
                         lastFrameTime = currentTime;
                         BufferedImage bufferedImage = converter.getBufferedImage(frame);
                         byte[] frameBytes = convertBufferedImageToBytes(bufferedImage);
-                        FrameData frameData = new FrameData(currentTime - startTime, frameBytes);
+                        FrameData frameData = new FrameData(currentTime - startTime, frameBytes, filePath);
                         frameSender.sendFrame(frameData);
                     }
                     frameCounter++;
