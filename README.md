@@ -36,6 +36,13 @@ Example: GET /start-for-file?path=video.mkv&interval=10&frameCount=5
 ```
 GET /config
 ```
+## Использованные технологии
+
+JavaCV и FFMPEG для обработки видеопотоков (файл, rtsp)
+
+Spring Boot для межсервисного взаимодействия
+
+Работоспособность тестировалась на JDK Eclipse Temurin 17, файл video.mkv (в корне проекта)
 
 # P.S
 
