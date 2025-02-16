@@ -6,13 +6,14 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 import ru.naburnm8.rtsplistener.processing.FileVideoProcessor;
 import ru.naburnm8.rtsplistener.processing.ProcessedData;
-import ru.naburnm8.rtsplistener.processing.VideoProcessor;
+import ru.naburnm8.rtsplistener.processing.RtspVideoProcessor;
+
 
 @RestController
 public class Controller {
 
     @Autowired
-    private VideoProcessor videoProcessor;
+    private RtspVideoProcessor videoProcessor;
 
     @Autowired
     private FileVideoProcessor fileVideoProcessor;

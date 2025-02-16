@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 
+@Deprecated
 @Service
 public class VideoProcessor {
     private final FrameSender frameSender;
