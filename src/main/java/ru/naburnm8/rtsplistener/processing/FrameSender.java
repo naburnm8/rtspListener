@@ -19,7 +19,7 @@ public class FrameSender {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<FrameData> request = new HttpEntity<>(frameData, headers);
-        System.out.println(frameData);
+        //System.out.println(frameData);
         restTemplate.postForObject(secondaryServiceURL, request, String.class);
     }
 }

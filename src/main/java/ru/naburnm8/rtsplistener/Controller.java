@@ -3,10 +3,9 @@ package ru.naburnm8.rtsplistener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.naburnm8.rtsplistener.processing.FileVideoProcessor;
+import ru.naburnm8.rtsplistener.processing.ProcessedData;
 import ru.naburnm8.rtsplistener.processing.VideoProcessor;
 
 @RestController
@@ -38,5 +37,10 @@ public class Controller {
     @GetMapping("/conf")
     public String config(){
         return env.getProperty("secondaryServiceUrl");
+    }
+
+    @PostMapping()
+    public void receiveProcessedData(@RequestBody ProcessedData processedData){
+        System.out.println(processedData);
     }
 }

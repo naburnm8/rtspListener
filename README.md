@@ -28,7 +28,7 @@ Example: GET /start?rtspUrl=rtsp://localhost/&interval=10&frameCount=5
 
 ```
 GET /start-for-file; params: path, interval [ms], frameCount
-Example: /start-for-file?path=video.mkv&interval=10&frameCount=5
+Example: GET /start-for-file?path=video.mkv&interval=10&frameCount=5
 ```
 
 - Запрос на отображение конфигурации
